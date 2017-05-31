@@ -128,7 +128,7 @@ POSSIBILITY OF SUCH DAMAGE.
 import random
 import os
 import sys
-import cPickle as pickle
+import pickle
 
 from grizzled.cmdline import CommandLineParser
 
@@ -150,7 +150,7 @@ __license__   = 'BSD-style license'
 # Internal Constants
 # ---------------------------------------------------------------------------
 
-_PICKLE_PROTOCOL = 2
+_PICKLE_PROTOCOL = 3
 
 # ---------------------------------------------------------------------------
 # Functions
@@ -180,9 +180,9 @@ def get_random_fortune(fortune_file):
     """
     fortune_index_file = fortune_file + '.dat'
     if not os.path.exists(fortune_index_file):
-        raise ValueError, 'Can\'t find file "%s"' % fortune_index_file
+        raise ValueError('Can\'t find file "%s"' % fortune_index_file)
 
-    fortuneIndex = open(fortune_index_file)
+    fortuneIndex = open(fortune_index_file, 'rb')
     data = pickle.load(fortuneIndex)
     fortuneIndex.close()
     randomRecord = random_int(0, len(data) - 1)
@@ -227,23 +227,23 @@ def make_fortune_data_file(fortune_file, quiet=False):
     """
     fortune_index_file = fortune_file + '.dat'
     if not quiet:
-        print 'Updating "%s" from "%s"...' % (fortune_index_file, fortune_file)
+        print ('Updating "%s" from "%s"...' % (fortune_index_file, fortune_file))
 
     data = []
-    shortest = sys.maxint
+    shortest = sys.maxsize
     longest = 0
-    for start, length, fortune in _read_fortunes(open(fortune_file, 'rU')):
+    for start, length, fortune in _read_fortunes(open(fortune_file, 'rt', newline=None)):
         data += [(start, length)]
         shortest = min(shortest, length)
         longest = max(longest, length)
 
     fortuneIndex = open(fortune_index_file, 'wb')
-    pickle.dump(data, fortuneIndex, _PICKLE_PROTOCOL)
+    pickle.dump(data, fortuneIndex, protocol=_PICKLE_PROTOCOL)
     fortuneIndex.close()
 
     if not quiet:
-        print 'Processed %d fortunes.\nLongest: %d\nShortest %d' %\
-              (len(data), longest, shortest)
+        print('Processed %d fortunes.\nLongest: %d\nShortest %d' %\
+              (len(data), longest, shortest))
 
 def main():
     """
@@ -275,12 +275,12 @@ def main():
 
     try:
         if options.show_version:
-            print 'fortune, version %s' % __version__
+            print('fortune, version %s' % __version__)
         elif options.update:
             make_fortune_data_file(fortune_file)
         else:
             sys.stdout.write(get_random_fortune(fortune_file))
-    except ValueError, msg:
+    except ValueError:
         print >> sys.stderr, msg
         sys.exit(1)
 
