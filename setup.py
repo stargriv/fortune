@@ -21,15 +21,15 @@ def load_info():
     result = {}
     pattern = re.compile(r'^(__\w+__)\s*=\s*[\'"]([^\'"]*)[\'"]')
     here = os.path.dirname(os.path.abspath(sys.argv[0]))
-    for line in open(os.path.join(here, 'fortune', '__init__.py'), 'r'):
+    for line in open(os.path.join(here, 'fortune3', '__init__.py'), 'r'):
         match = pattern.match(line)
         if match:
             result[match.group(1)] = match.group(2)
 
     sys.path = [here] + sys.path
-    mf = os.path.join(here, 'fortune', '__init__.py')
+    mf = os.path.join(here, 'fortune3', '__init__.py')
     try:
-        m = imp.load_module('fortune', open(mf), mf,
+        m = imp.load_module('fortune3', open(mf), mf,
                             ('__init__.py', 'r', imp.PY_SOURCE))
         result['long_description'] = m.__doc__
     except:
@@ -40,7 +40,7 @@ info = load_info()
 
 # Now the setup stuff.
 
-NAME = 'fortune'
+NAME = 'fortune3'
 DOWNLOAD_URL = ('http://pypi.python.org/packages/source/f/%s/%s-%s.tar.gz' %
                 (NAME, NAME, info['__version__']))
 
@@ -54,7 +54,7 @@ setup(name             = NAME,
       license          = info['__license__'],
       author           = info['__author__'],
       author_email     = info['__email__'],
-      entry_points     = {'console_scripts' : ['fortune=fortune:main']},
+      entry_points     = {'console_scripts' : ['fortune3=fortune3:main']},
       install_requires = ['grizzled-python>=1.0'],
       classifiers      = ['Intended Audience :: End Users/Desktop',
                           'Operating System :: OS Independent',
