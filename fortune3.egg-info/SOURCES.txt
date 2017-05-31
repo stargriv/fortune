@@ -1,0 +1,9 @@
+setup.cfg
+setup.py
+fortune3/__init__.py
+fortune3.egg-info/PKG-INFO
+fortune3.egg-info/SOURCES.txt
+fortune3.egg-info/dependency_links.txt
+fortune3.egg-info/entry_points.txt
+fortune3.egg-info/requires.txt
+fortune3.egg-info/top_level.txt
