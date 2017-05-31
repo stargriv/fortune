@@ -1,9 +1,9 @@
-fortune: Display random quotes
+fortune3: Display random quotes
 ==============================
 
 ## Introduction
 
-`fortune` is yet another implementation of the Unix-style `fortune` program
+`fortune3` is yet another implementation of the Unix-style `fortune` program
 that displays a random message from a database of quotations. Conceptually,
 it's similar to the BSD fortune program originally written by [Ken Arnold][].
 Unlike Arnold's program, this version is written in [Python][] and should
