@@ -2,5 +2,5 @@ build
 dist
 epydoc
 ez_setup.pyc
-fortune.egg-info/
+fortune3.egg-info/
 *.pyc
