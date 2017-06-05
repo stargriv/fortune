@@ -18,6 +18,7 @@ For installation and usage instructions, please see the [web page][].
 ## Copyright
 
 Copyright &copy; 2008-2012 Brian M. Clapper
+Copyright &copy; 2017 Grigory Starikov
 
 ## License
 
