@@ -188,7 +188,7 @@ def get_random_fortune(fortune_file):
     randomRecord = random_int(0, len(data) - 1)
     (start, length) = data[randomRecord]
 
-    f = open(fortune_file, 'rU')
+    f = open(fortune_file, 'rt', newline=None)
     f.seek(start)
     fortuneCookie = f.read(length)
     f.close()
@@ -210,7 +210,7 @@ def _read_fortunes(fortune_file):
             if start == None:
                 start = pos
             result.append(line)
-        pos += len(line)
+        pos += len(repr(line))
 
     if result:
         yield (start, pos - start, result)
